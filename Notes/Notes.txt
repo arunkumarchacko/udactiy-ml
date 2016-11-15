@@ -1,1 +1,3 @@
 https://github.com/udacity/machine-learning.git
+https://www.kaggle.com/mrisdal/titanic/exploring-survival-on-the-titanic
+http://statweb.stanford.edu/~tibs/ElemStatLearn/
