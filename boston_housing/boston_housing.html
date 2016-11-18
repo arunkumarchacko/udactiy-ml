@@ -11779,7 +11779,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Import libraries necessary for this project</span>
@@ -11851,7 +11851,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="prompt input_prompt">In&nbsp;[22]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># TODO: Minimum price of the data</span>
@@ -11876,6 +11876,8 @@ div#notebook {
 <span class="k">print</span> <span class="s2">&quot;Mean price: ${:,.2f}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mean_price</span><span class="p">)</span>
 <span class="k">print</span> <span class="s2">&quot;Median price ${:,.2f}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">median_price</span><span class="p">)</span>
 <span class="k">print</span> <span class="s2">&quot;Standard deviation of prices: ${:,.2f}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">std_price</span><span class="p">)</span>
+
+<span class="n">features</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
 </pre></div>
 
 </div>
@@ -11897,6 +11899,75 @@ Median price $438,900.00
 Standard deviation of prices: $165,171.13
 </pre>
 </div>
+</div>
+
+<div class="output_area"><div class="prompt output_prompt">Out[22]:</div>
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>RM</th>
+      <th>LSTAT</th>
+      <th>PTRATIO</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>489.000000</td>
+      <td>489.000000</td>
+      <td>489.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>6.240288</td>
+      <td>12.939632</td>
+      <td>18.516564</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>0.643650</td>
+      <td>7.081990</td>
+      <td>2.111268</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>3.561000</td>
+      <td>1.980000</td>
+      <td>12.600000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>5.880000</td>
+      <td>7.370000</td>
+      <td>17.400000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>6.185000</td>
+      <td>11.690000</td>
+      <td>19.100000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>6.575000</td>
+      <td>17.120000</td>
+      <td>20.200000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>8.398000</td>
+      <td>37.970000</td>
+      <td>22.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
 </div>
 
 </div>
@@ -11962,7 +12033,7 @@ PTRATIO: People would like to send their children to better school. Lower PTRATI
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># TODO: Import &#39;r2_score&#39;</span>
@@ -12085,7 +12156,7 @@ PTRATIO: People would like to send their children to better school. Lower PTRATI
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># TODO: Import &#39;train_test_split&#39;</span>
@@ -13820,6 +13891,7 @@ OCVJkiRJkqSR8eKUJEmSJEmSRsaLU5IkSZIkSRqZ/wPjD9WbFwJrqwAAAABJRU5ErkJggg==
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Answer: Picking model with max_depth=3. After around 200 samples the training score converge to around .8. Testing score also converges to around .78 after 200 samples. i.e. both training and testing score converges around .8 after about 200 points. But as more data is added, the "uncertaintly" reduces for test score.</p>
 <p>Also at very low samples, the model is overfitting with high variance.</p>
+<p>Since the score is converging to around .8 for both training and test datasets (with 400 datasets), adding more datasets may not help much.</p>
 
 </div>
 </div>
@@ -14627,7 +14699,7 @@ rJmZmZm1MSdrZmZmZm3MyZqZmZlZG3OyZmZmZtbG/h/o79ebBnjj8QAAAABJRU5ErkJggg==
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Answer: Grid search is the technique in which models are generated for different parameters of a learning algorithm and finding the parameter combination of the model which give the maximum score.</p>
+<p>Answer: Grid search is the technique in which models are generated for different parameters of a learning algorithm and finding the parameter combination of the model which give the maximum score. To find the maximum score it used cross-validation technique. i.e. it will split the data into 'k-folds" and model is trained k times for each parameter set where one of the fold is used to testing and other k-1 folds are used for testing. Average score across these k models are taken as the score for that particular parameter set.</p>
 
 </div>
 </div>
@@ -14685,7 +14757,7 @@ rJmZmZm1MSdrZmZmZm3MyZqZmZlZG3OyZmZmZtbG/h/o79ebBnjj8QAAAABJRU5ErkJggg==
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="prompt input_prompt">In&nbsp;[23]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># TODO: Import &#39;make_scorer&#39;, &#39;DecisionTreeRegressor&#39;, and &#39;GridSearchCV&#39;</span>
@@ -14702,16 +14774,17 @@ rJmZmZm1MSdrZmZmZm3MyZqZmZlZG3OyZmZmZtbG/h/o79ebBnjj8QAAAABJRU5ErkJggg==
     <span class="n">cv_sets</span> <span class="o">=</span> <span class="n">ShuffleSplit</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">n_iter</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">test_size</span> <span class="o">=</span> <span class="mf">0.20</span><span class="p">,</span> <span class="n">random_state</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
 
     <span class="c1"># TODO: Create a decision tree regressor object</span>
-    <span class="n">regressor</span> <span class="o">=</span> <span class="n">DecisionTreeRegressor</span><span class="p">()</span>
+    <span class="n">regressor</span> <span class="o">=</span> <span class="n">DecisionTreeRegressor</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
     <span class="c1"># TODO: Create a dictionary for the parameter &#39;max_depth&#39; with a range from 1 to 10</span>
-    <span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;max_depth&#39;</span><span class="p">:[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">]}</span>
+    <span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;max_depth&#39;</span><span class="p">:</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">)}</span>
+    
 
     <span class="c1"># TODO: Transform &#39;performance_metric&#39; into a scoring function using &#39;make_scorer&#39; </span>
     <span class="n">scoring_fnc</span> <span class="o">=</span> <span class="n">make_scorer</span><span class="p">(</span><span class="n">performance_metric</span><span class="p">)</span>
 
-    <span class="c1"># TODO: Create the grid search object</span>
-    <span class="n">grid</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">regressor</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="n">scoring_fnc</span><span class="p">)</span> 
+    <span class="c1"># TODO: Create the grid search object    </span>
+    <span class="n">grid</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">regressor</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="n">scoring_fnc</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="n">cv_sets</span><span class="p">)</span>
 
     <span class="c1"># Fit the grid search object to the data to compute the optimal model</span>
     <span class="n">grid</span> <span class="o">=</span> <span class="n">grid</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
@@ -14748,7 +14821,7 @@ rJmZmZm1MSdrZmZmZm3MyZqZmZlZG3OyZmZmZtbG/h/o79ebBnjj8QAAAABJRU5ErkJggg==
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="prompt input_prompt">In&nbsp;[18]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Fit the training data to the model using grid search</span>
@@ -14768,7 +14841,7 @@ rJmZmZm1MSdrZmZmZm3MyZqZmZlZG3OyZmZmZtbG/h/o79ebBnjj8QAAAABJRU5ErkJggg==
 
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Parameter &#39;max_depth&#39; is 10 for the optimal model.
+<pre>Parameter &#39;max_depth&#39; is 4 for the optimal model.
 </pre>
 </div>
 </div>
@@ -14782,7 +14855,7 @@ rJmZmZm1MSdrZmZmZm3MyZqZmZlZG3OyZmZmZtbG/h/o79ebBnjj8QAAAABJRU5ErkJggg==
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Answer: max depth for optimal model is 10. My guess was 4. So my intuition was not accurate.</p>
+<p>Answer: max depth for optimal model is 4. My guess was 4.</p>
 
 </div>
 </div>
@@ -14831,7 +14904,7 @@ rJmZmZm1MSdrZmZmZm3MyZqZmZlZG3OyZmZmZtbG/h/o79ebBnjj8QAAAABJRU5ErkJggg==
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="prompt input_prompt">In&nbsp;[24]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Produce a matrix for client data</span>
@@ -14854,9 +14927,9 @@ rJmZmZm1MSdrZmZmZm3MyZqZmZlZG3OyZmZmZtbG/h/o79ebBnjj8QAAAABJRU5ErkJggg==
 
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Predicted selling price for Client 1&#39;s home: $428,190.00
-Predicted selling price for Client 2&#39;s home: $277,200.00
-Predicted selling price for Client 3&#39;s home: $789,600.00
+<pre>Predicted selling price for Client 1&#39;s home: $408,800.00
+Predicted selling price for Client 2&#39;s home: $231,253.45
+Predicted selling price for Client 3&#39;s home: $938,053.85
 </pre>
 </div>
 </div>
@@ -14870,8 +14943,11 @@ Predicted selling price for Client 3&#39;s home: $789,600.00
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Answer:Client3 house is intuitively better than Client1 house for each house feature. Similarly Client1 house is better than Client2 house for each house feature. So the order of price looks correct.</p>
-<p>Assuming the client houses are drawn at random, the mean for these three houses are 498330, which is within the 95% confidence interval for the training set (454342 +- (165171 * 1.96)). Hence model cannot be rejected</p>
+<p>Answer:
+Assuming that LSTAT is negatively correlated to price and RM is positively correlated to price and PTRATIO does not have much impact on price.</p>
+<p>Client 1: rooms are two std below mean. LSStat is about .6 std above. Hence 95% of houses will have more room than this house. With std of .6 for LSTAT, I assume about 45% of houses to be in better LSTAT neighbourhood. Looks like the price is on the higher side. It is also possible LSTAT has a bigger influenece on price. If that is the case the price looks ok.</p>
+<p>Client 2: Romm are about 4 std below mean. LSStat is about 3 std about the mean. This house has RM and LSTAT close to minimum for for RM and LSTAT in the sample. Since Min price in the training set was 105000, the price for this house looks higher. So I would not accept this if I am a buyer.</p>
+<p>Client 3: This house has LSTAT and RM close to max in the training set. The given price is close to the max price in the training set. Hence this looks like a fair price.</p>
 
 </div>
 </div>
@@ -14888,7 +14964,7 @@ Predicted selling price for Client 3&#39;s home: $789,600.00
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="prompt input_prompt">In&nbsp;[25]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">vs</span><span class="o">.</span><span class="n">PredictTrials</span><span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="n">prices</span><span class="p">,</span> <span class="n">fit_model</span><span class="p">,</span> <span class="n">client_data</span><span class="p">)</span>
@@ -14904,18 +14980,18 @@ Predicted selling price for Client 3&#39;s home: $789,600.00
 
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Trial 1: $407,400.00
-Trial 2: $397,950.00
-Trial 3: $405,825.00
-Trial 4: $367,500.00
-Trial 5: $396,480.00
-Trial 6: $435,600.00
-Trial 7: $407,400.00
-Trial 8: $437,220.00
-Trial 9: $405,825.00
-Trial 10: $396,900.00
+<pre>Trial 1: $391,183.33
+Trial 2: $424,935.00
+Trial 3: $415,800.00
+Trial 4: $420,622.22
+Trial 5: $418,377.27
+Trial 6: $411,931.58
+Trial 7: $399,663.16
+Trial 8: $407,232.00
+Trial 9: $351,577.61
+Trial 10: $413,700.00
 
-Range in prices: $69,720.00
+Range in prices: $73,357.39
 </pre>
 </div>
 </div>
