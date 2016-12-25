@@ -22,6 +22,7 @@ class LearningAgent(Agent):
         self.originalEpsilon = epsilon
         self.alpha = alpha       # Learning factor
 
+        self.t = 0
         ###########
         ## TO DO ##
         ###########
@@ -35,7 +36,7 @@ class LearningAgent(Agent):
 
         # Select the destination as the new location to route to
         self.planner.route_to(destination)
-        
+        self.t += 1
         ########### 
         ## TO DO ##
         ###########
@@ -47,8 +48,12 @@ class LearningAgent(Agent):
             self.epsilon = 0;
             self.alpha = 0;
         else:
-            self.epsilon -= .05
-            print 'Reset: epsilon=', self.epsilon        
+            self.epsilon -= .02            
+            #self.epsilon = max((1. / (1 + math.exp(self.t-15))), 1 - 0.03*self.t)
+            self.epsilon = math.pow(.92, self.t)
+            #self.alpha = max(.25, (20.)/(20+self.t))
+            self.alpha = 0.5
+            print 'Reset: epsilon=', self.epsilon, 'Alpha=', self.alpha, 'T=',self.t        
          
         pprint.pprint(self.Q)
         return None
@@ -197,7 +202,7 @@ def run():
     #   verbose     - set to True to display additional output from the simulation
     #   num_dummies - discrete number of dummy agents in the environment, default is 100
     #   grid_size   - discrete number of intersections (columns, rows), default is (8, 6)
-    env = Environment()
+    env = Environment(verbose=True)
     
     ##############
     # Create the driving agent
@@ -220,7 +225,7 @@ def run():
     #   display      - set to False to disable the GUI if PyGame is enabled
     #   log_metrics  - set to True to log trial and simulation results to /logs
     #   optimized    - set to True to change the default log file name
-    sim = Simulator(env, update_delay=.01, log_metrics=True, optimized=True)
+    sim = Simulator(env, update_delay=.01, log_metrics=True, optimized=True, display=False)
     
     ##############
     # Run the simulator
