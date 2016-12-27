@@ -48,12 +48,12 @@ class LearningAgent(Agent):
             self.epsilon = 0;
             self.alpha = 0;
         else:
-            self.epsilon -= .02            
-            #self.epsilon = max((1. / (1 + math.exp(self.t-15))), 1 - 0.03*self.t)
-            self.epsilon = math.pow(.92, self.t)
-            #self.alpha = max(.25, (20.)/(20+self.t))
-            self.alpha = 0.5
-            print 'Reset: epsilon=', self.epsilon, 'Alpha=', self.alpha, 'T=',self.t        
+            #self.epsilon -= .02            
+            ##self.epsilon = max((1. / (1 + math.exp(self.t-15))), 1 - 0.03*self.t)
+            self.epsilon = math.pow(.97, self.t)
+            ##self.alpha = max(.25, (20.)/(20+self.t))
+            #self.alpha = 0.5
+            #print 'Reset: epsilon=', self.epsilon, 'Alpha=', self.alpha, 'T=',self.t        
          
         pprint.pprint(self.Q)
         return None
@@ -80,7 +80,7 @@ class LearningAgent(Agent):
         #   If it is not, create a dictionary in the Q-table for the current 'state'
         #   For each action, set the Q-value for the state-action pair to 0
         
-        state = (waypoint, inputs['light'], inputs['oncoming'])
+        state = (waypoint, inputs['light'], inputs['oncoming'], inputs['left'])
         
         self.createQ(state)
         
@@ -106,8 +106,11 @@ class LearningAgent(Agent):
         return maxQ 
     
     def get_maxAction(self, state):
-        mx = max(self.Q[state].iteritems(), key=operator.itemgetter(1))
-        return mx[0]
+        stQ = self.Q[state]
+        mx = max(stQ.iteritems(), key=operator.itemgetter(1))        
+        allmx = [x for x in stQ if stQ[x] == mx[1]]
+
+        return random.choice(allmx)
 
     def constructDictWithActions(self):
         result = {}
@@ -169,9 +172,9 @@ class LearningAgent(Agent):
         # When learning, implement the value iteration update rule
         #   Use only the learning rate 'alpha' (do not use the discount factor 'gamma')
 
-        old = self.Q[state][action]
-
-        self.Q[state][action] = old + self.alpha * (reward - old)
+        if self.learning:
+            old = self.Q[state][action]
+            self.Q[state][action] = old + self.alpha * (reward - old)
 
         #pprint.pprint(self.Q)
         return
@@ -226,13 +229,14 @@ def run():
     #   log_metrics  - set to True to log trial and simulation results to /logs
     #   optimized    - set to True to change the default log file name
     sim = Simulator(env, update_delay=.01, log_metrics=True, optimized=True, display=False)
+    #sim = Simulator(env, update_delay=.01, log_metrics=True, display=False)
     
     ##############
     # Run the simulator
     # Flags:
     #   tolerance  - epsilon tolerance before beginning testing, default is 0.05 
     #   n_test     - discrete number of testing trials to perform, default is 0
-    sim.run(n_test=10)
+    sim.run(n_test=10, tolerance=.01)
 
 
 if __name__ == '__main__':
