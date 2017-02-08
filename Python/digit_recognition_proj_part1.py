@@ -22,6 +22,7 @@ from keras.layers import Convolution2D, MaxPooling2D
 from keras.utils import np_utils
 from keras import backend as K
 from keras.models import load_model
+from sklearn.utils import shuffle
 
 single_digit_model_filename = 'single_digit_recognizer_model.h5'
 def concatenate_digits(startIndex, length, data, axis):
@@ -32,7 +33,7 @@ def concatenate_sliding_window(data, length, axis):
 
 def train_and_get_one_digit_recognizer(Xtrain, yTrain, XTest, yTest, inp_shape):
     batch_size = 128
-    nb_epoch = 10
+    nb_epoch = 5
     nb_filters = 32
     pool_size = (2, 2)
     kernel_size = (3, 3)
@@ -79,8 +80,8 @@ def train_and_get_one_digit_recognizer(Xtrain, yTrain, XTest, yTest, inp_shape):
 
     print('Saving model:', single_digit_model_filename)
     model.save(single_digit_model_filename)
-
     return model
+
 
 
 def get_concatenated_digits(X_train, y_train, X_test, y_test, num_digits):
@@ -201,20 +202,33 @@ image_cols = 28
 inp_shape = (28,28, 1)
 #classifier_inp_shape = (num_digits * 10, 1)
 n_classes = 11
-train_size = 1500
+train_size = 300000
 
 print ('Loading data')
 (X_train, y_train), (X_test, y_test) = mnist.load_data()
-pp.pprint(X_train[0])
+print (X_train.shape, y_train.shape, X_test.shape, y_test.shape)
+
+print ('Adding empty digits')
+empty_imgs = []
+empty_imgs.append(X_train)
+for i in range(X_train.shape[0] / 10):
+    empty_img = get_empty_image(image_cols).reshape(1,image_cols, image_cols)
+    # X_train = np.concatenate((X_train, empty_img))
+    # y_train = np.append(y_train, [11])
+    empty_imgs.append(empty_img)
+
+print ('Number of empty images:', len(empty_imgs))
+X_train = np.concatenate(empty_imgs)
+
+y_train = np.append(y_train, [10 for i in range(len(empty_imgs) - 1)])
+print (X_train.shape, y_train.shape, X_test.shape, y_test.shape)
+
 y_train = np_utils.to_categorical(y_train, n_classes)
 y_test = np_utils.to_categorical(y_test, n_classes)
 
-print (X_train.shape, y_train.shape, X_test.shape, y_test.shape)
+X_train, y_train = shuffle(X_train, y_train, random_state=0)
 
-for i in range(X_train.shape[0] / 10):
-    empty_img = get_empty_image(image_cols)
-    pp.pprint(empty_img)
-    break
+print (X_train.shape, y_train.shape, X_test.shape, y_test.shape)
 
 print ('Training one-digit recognizer')
 one_digit_recognizer = train_and_get_one_digit_recognizer(X_train[:train_size], y_train[:train_size], X_test[:train_size], y_test[:train_size], inp_shape)
