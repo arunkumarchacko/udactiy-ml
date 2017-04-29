@@ -29,6 +29,8 @@ from keras.applications.resnet50 import preprocess_input
 
 test_data_path = '/Users/arunkumar/ml/data/svhn/test'
 train_data_path = '/Users/arunkumar/ml/data/svhn/train'
+train_data_path = '/home/ubuntu/ml/data/svhn/train'
+test_data_path = '/home/ubuntu/ml/data/svhn/test'
 extra_data_path = '/Users/arunkumar/ml/data/svhn/extra'
 valid_data_path = '/Users/arunkumar/ml/data/svhn/valid'
 real_life_data_path = '/Users/arunkumar/ml/data/svhn/internet'
@@ -313,11 +315,11 @@ def train_bb_cropped_multi_output_goodfellow(x_train, y_train, train_digit1, tra
     print 'ytest:', y_test[0]
     batch_size = 128
     nb_epoch = 1
-    num_conv_layers = 3
+    num_conv_layers = 5
     max_pool_size = (2,2)
     conv_kernel_size = (5,5)
     num_conv_filter_per_layer = [64, 128,160, 192, 192, 192, 192, 192, 192]
-    dense_layer_units = 512
+    dense_layer_units = 3072
     zero_padding_size = (1, 1)
     
     if os.path.exists(model_ouput_file):
@@ -465,8 +467,10 @@ def get_data_from_bb_cropped_images(path, max_digits=6):
     digit1 = []
     digit2 = []
     digit3 = []
-    for img_file in img_files[:10000]:
-        # print os.path.basename(img_file)
+    print img_file[:3]
+    for img_file in img_files[:100]:
+	#print img_file
+        #print os.path.basename(img_file)
         splitted = os.path.basename(img_file).split('.')
         the_len = int(splitted[0])
 
