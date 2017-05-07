@@ -41914,56 +41914,82 @@ I tried out multiple epsilon functions like</p>
 
 </div>
 </div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Answer:
-The optimal policy for states:</p>
+</div># Answer:
+The optimal policy for states:
+    1. (waypoint=forward, light=red, oncoming=None, left=forward) is None, since the cab should stop at the red light
+    2. (waypoint=forward, light=green, oncoming=None, left=None) is forward, since the cab should move forward on green light
+    2. (waypoint=forward, light=green, oncoming=forward, left=None) is forward, since the cab should move forward on green light even if the oncoming traffic is moving forward and if not vehicle is coming from left.
+   
+If the vehicle is moving forward or left, the vehicle should be stopped on Red signal. So it should have learned None for the following states:
 
-<pre><code>1. (waypoint=forward, light=red, oncoming=None) is None, since the cab should stop at the red light
-2. (waypoint=forward, light=green, oncoming=None) is forward, since the cab should move forward on green light
-2. (waypoint=forward, light=green, oncoming=forward) is forward, since the cab should move forward on green light even if the oncoming traffic is moving forward.
+'forward', 'red', 'forward', 'forward')     -- forward : -20.01  -- right : 0.00  -- None : 2.07  -- left : -20.39  ,
+ 'forward', 'red', 'forward', 'left')       -- forward : 0.00  -- right : 0.39  -- None : 2.05  -- left : -4.53  ,
+ 'forward', 'red', 'forward', 'right')      -- forward : 0.00  -- right : 0.66  -- None : 1.97  -- left : -4.96  ,
+ 'forward', 'red', 'forward', None)         -- forward : -7.13  -- right : 0.85  -- None : 1.54  -- left : -20.03  ,
+ 'forward', 'red', 'left', 'forward')       -- forward : -20.07  -- right : -10.26  -- None : 1.36  -- left : 0.00  ,
+ 'forward', 'red', 'left', 'left')          -- forward : -5.02  -- right : 0.51  -- None : 0.00  -- left : -15.23  ,
+ 'forward', 'red', 'left', 'right')         -- forward : -4.82  -- right : 0.44  -- None : 1.10  -- left : 0.00  ,
+ 'forward', 'red', 'left', None)            -- forward : -9.77  -- right : 1.09  -- None : 2.04  -- left : -24.49  ,
+ 'forward', 'red', 'right', 'forward')      -- forward : -20.16  -- right : 0.00  -- None : 1.50  -- left : 0.00  ,
+ 'forward', 'red', 'right', 'left')         -- forward : 0.00  -- right : 0.52  -- None : 0.00  -- left : 0.00  ,
+ 'forward', 'red', 'right', 'right')        -- forward : -5.18  -- right : 0.79  -- None : 0.00  -- left : 0.00  ,
+ 'forward', 'red', 'right', None)           -- forward : -5.11  -- right : 0.94  -- None : 2.35  -- left : -20.24  ,
+ 'forward', 'red', None, 'forward')         -- forward : -29.80  -- right : -18.96  -- None : 2.08  -- left : 0.00  ,
+ 'forward', 'red', None, 'left')            -- forward : -7.89  -- right : 0.44  -- None : 1.86  -- left : -11.62  ,
+ 'forward', 'red', None, 'right')           -- forward : -20.16  -- right : -0.01  -- None : 2.32  -- left : -5.48  ,
+ 'forward', 'red', None, None)              -- forward : -16.27  -- right : 0.81  -- None : 1.55  -- left : -9.66  ,
+'left', 'red', 'forward', 'forward')        -- forward : -20.18  -- right : 0.00  -- None : 1.38  -- left : -19.95  ,
+ 'left', 'red', 'forward', 'left')          -- forward : -5.27  -- right : 1.00  -- None : 0.00  -- left : -7.83  ,
+ 'left', 'red', 'forward', 'right')         -- forward : -4.87  -- right : 0.00  -- None : 1.76  -- left : -5.42  ,
+ 'left', 'red', 'forward', None)            -- forward : -9.77  -- right : 0.40  -- None : 1.70  -- left : -9.08  ,
+ 'left', 'red', 'left', 'forward')          -- forward : 0.00  -- right : 0.00  -- None : 2.08  -- left : -34.90  ,
+ 'left', 'red', 'left', 'left')             -- forward : 0.00  -- right : 0.00  -- None : 1.63  -- left : -4.74  ,
+ 'left', 'red', 'left', 'right')            -- forward : 0.00  -- right : 0.76  -- None : 0.86  -- left : 0.00  ,
+ 'left', 'red', 'left', None)               -- forward : -7.02  -- right : 0.32  -- None : 1.86  -- left : -5.37  ,
+ 'left', 'red', 'right', 'forward')         -- forward : -20.00  -- right : -15.03  -- None : 1.09  -- left : -19.90  ,
+ 'left', 'red', 'right', 'left')            -- forward : -5.19  -- right : 0.83  -- None : 1.52  -- left : -34.74  ,
+ 'left', 'red', 'right', 'right')           -- forward : 0.00  -- right : 0.00  -- None : 2.04  -- left : 0.00  ,
+ 'left', 'red', 'right', None)              -- forward : -9.21  -- right : 0.30  -- None : 2.04  -- left : -19.80  ,
+ 'left', 'red', None, 'forward')            -- forward : -35.16  -- right : -17.84  -- None : 1.59  -- left : -29.70  ,
+ 'left', 'red', None, 'left')               -- forward : -7.07  -- right : 0.10  -- None : 2.20  -- left : -8.55  ,
+ 'left', 'red', None, 'right')              -- forward : -15.05  -- right : 0.55  -- None : 2.29  -- left : -7.85  ,
+ 'left', 'red', None, None)                 -- forward : -10.24  -- right : 0.79  -- None : 1.51  -- left : -9.51  ,
 
-</code></pre>
-<p>Following states has wrong policy. State tuple is (waypoint, light, oncoming)
-    ('left', 'green', 'forward') should be None (since turning left towards oncoming is illegal), but learned forward 
-     ('right', 'green', 'forward') Should be right but learned forward
-     ('right', 'green', 'right') should be Right. but learned forward
-     ('left', 'green', 'right') should be None. But learned forward
-     ('right', 'red', 'forward') should be None. But learned right
-     ('forward', 'red', 'forward') should be None and learned None
-     ('right', 'red', 'right') should be None but learned right
-     ('right', 'green', 'left') should be right but learned left</p>
-<p>Following states has correct policy: 
-     ('forward', 'green', 'left') should be forward and learned forward
-    ('forward', 'green', None) should be forward and learned forward
-     ('forward', 'red', 'right') should be None and learned None
-     ('left', 'red', 'left') should be None and learned None
-     ('right', 'red', 'left') should be None and learned None
-     ('left', 'red', None) should be None and learned None 
-     ('right', 'red', None) should be None and learned None
-     ('left', 'red', 'right') should be None and learned None 
-     ('forward', 'red', None) should be None and learned None
-     ('forward', 'green', 'forward') should be forward and learned forward
-     ('forward', 'red', 'left') should be None and learned None
-     ('forward', 'green', 'right') should be forward and learned forward
-     ('left', 'red', 'forward') should be None and learned None
-     ('left', 'green', None) should be left and learned left
-     ('right', 'green', None) should be right and learned right
-     ('left', 'green', 'left') should be left and learned left</p>
-<p>None is the correct policy for the following state since the cab should be stopped on Red signal. It correctly learned the policy since the weight for 'None' action has the highest score.
-    ('left', 'red', 'forward')
-     -- forward : -12.74
-     -- right : 0.39
-     -- None : 1.74
-     -- left : 0.00</p>
+But forward:red:left:left, forward:red:right:right, , forward:red:right:left, left:red:forward:left states got it wrong
 
-</div>
-</div>
-</div>
+If the vehicle is turning right on Red signal and if oncoming vehicle is turning left or the vehicle on the left is going forward, the vehcile should stop. So None should be the action for the following states.
+
+'right', 'red', 'forward', 'forward')       -- forward : 0.00  -- right : 0.00  -- None : 1.19  -- left : 0.00  ,
+'right', 'red', 'left', 'forward')         -- forward : -30.12  -- right : -18.79  -- None : 0.93  -- left : 0.00  ,
+'right', 'red', 'right', 'forward')        -- forward : 0.00  -- right : -9.73  -- None : 0.99  -- left : -19.86  ,
+'right', 'red', None, 'forward')           -- forward : -19.54  -- right : -9.75  -- None : 1.28  -- left : -20.16  ,
+ 'right', 'red', 'left', 'left')            -- forward : -21.82  -- right : 1.21  -- None : 1.39  -- left : 0.00  ,
+ 'right', 'red', 'left', 'right')           -- forward : -5.29  -- right : 0.00  -- None : 1.78  -- left : -5.33  ,
+ 'right', 'red', 'left', None)              -- forward : -9.25  -- right : 1.25  -- None : 2.30  -- left : -5.37  ,
+
+It got all of them right.
+
+If the vehicle is turning right on Red signal and if oncoming vehicle is not turning left and the vehicle on the left is not going forward, the vehcile can turn right. So 'right' should be the action for the following states.
+ 'right', 'red', 'forward', 'left')         -- forward : -7.94  -- right : 2.25  -- None : 0.00  -- left : -5.35  ,
+ 'right', 'red', 'forward', 'right')        -- forward : -20.44  -- right : 1.46  -- None : 0.00  -- left : 0.00  ,
+ 'right', 'red', 'forward', None)           -- forward : -13.41  -- right : 1.83  -- None : 1.10  -- left : -5.30  ,
+ 'right', 'red', 'right', 'left')           -- forward : 0.00  -- right : 0.00  -- None : 1.51  -- left : 0.00  ,
+ 'right', 'red', 'right', 'right')          -- forward : 0.00  -- right : 1.97  -- None : 0.00  -- left : -20.46  ,
+ 'right', 'red', 'right', None)             -- forward : -7.06  -- right : 0.00  -- None : 1.94  -- left : -19.61  ,
+ 'right', 'red', None, 'left')              -- forward : -23.95  -- right : 2.18  -- None : 1.11  -- left : 0.00  ,
+ 'right', 'red', None, 'right')             -- forward : 0.00  -- right : 0.00  -- None : 1.33  -- left : 0.00  ,
+ 'right', 'red', None, None)                -- forward : -10.98  -- right : 1.45  -- None : 1.14  -- left : -12.01  ,
+ 
+It got the following states wrong - right:red:right:left, right:red:right:None, right:red:None:left, right:red:None:right
+
+'forward' is the correct policy for the following state since it is safe to go forward on a green signal and oncoming traffic is not turning towards you and the there is not traffic coming from left. It correctly learned the policy since the weight for 'forward' action has the highest score.
+    ('forward', 'green', None, None)
+ -- forward : 1.94
+ -- right : 0.99
+ -- None : -5.24
+ -- left : 0.35
+
+
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
