@@ -1,0 +1,72 @@
+Our best architecture consists of eight convolutional hidden layers, one locally connected hidden layer, and two densely connected hidden layers. 
+All connections are feedforward and go from onelayer to the next (no skip connections). 
+The number of units at each spatial location in each layer is [48, 64, 128,160] for the first four layers and 192 for all other locally connected layers. 
+All convolution kernels were of size 5 × 5. 
+The fully connectedlayers contain 3,072 units each. 
+
+The first hidden layer contains maxout units (Goodfellowet al., 2013) (with three filters per unit) while the others contain rectifier units.
+
+Each convolutional layer includes max pooling and subtractive normalization. 
+The max pooling window size is 2 × 2. 
+The stride alternates between 2 and 1 at each layer, so that half of the layers don’t reduce the spatial size of the representation. 
+All convolutions use zero padding on the input to preserve representation size. 
+The subtractive normalization operates on 3x3 windows and preserves representation size. 
+
+We trained with dropout applied to all hidden layers but not the input.
+
+54 x 54 image input
+
+Conv1 [48] (5x5) Stride2 Zero Padding
+Maxout (3 filters)
+dropout
+
+Conv2 [64] (5x5) Stride1 Zero Padding
+MaxPooling (2x2 window)
+Substractive Normalization (3x3 window)
+Relu
+dropout
+
+Conv3 [128] (5x5) Stride2 Zero Padding
+MaxPooling (2x2 window)
+Substractive Normalization (3x3 window)
+Relu
+dropout
+
+Conv4 [160] (5x5) Stride1 Zero Padding
+MaxPooling (2x2 window)
+Substractive Normalization (3x3 window)
+Relu
+dropout
+
+Conv5 [192] (5x5) Stride2 Zero Padding
+MaxPooling (2x2 window)
+Substractive Normalization (3x3 window)
+Relu
+dropout
+
+Conv6 [192] (5x5) Stride1 Zero Padding
+MaxPooling (2x2 window)
+Substractive Normalization (3x3 window)
+Relu
+dropout
+
+Conv7 [192] (5x5) Stride2 Zero Padding
+MaxPooling (2x2 window)
+Substractive Normalization (3x3 window)
+Relu
+dropout
+
+Conv8 [192] (5x5) Stride1 Zero Padding
+MaxPooling (2x2 window)
+Substractive Normalization (3x3 window)
+Relu
+dropout
+
+Locally connected
+Relu
+
+Dense1 [3072]
+Relu
+
+Dense2 [3072]
+Relu
